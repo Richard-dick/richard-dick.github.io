@@ -12,50 +12,52 @@
 #    `--'   `----''--'   '--' `--'
 
 
-
+theme: jekyll-text-theme
 
 ## => Site Settings
 ##############################
-text_skin: default # "default" (default), "dark", "forest", "ocean", "chocolate", "orange"
-highlight_theme: tomorrow # "default" (default), "tomorrow", "tomorrow-night", "tomorrow-night-eighties", "tomorrow-night-blue", "tomorrow-night-bright"
-url     : # the base hostname & protocol for your site e.g. https://www.someone.com
-baseurl : # does not include hostname
-title   : Zemdalk's blog
+text_skin: ocean # "default" (default), "dark", "forest", "ocean", "chocolate", "orange"
+highlight_theme: tomorrow-night-blue # "default" (default), "tomorrow", "tomorrow-night", "tomorrow-night-eighties", "tomorrow-night-blue", "tomorrow-night-bright"
+url     : https://Richard-dick.github.io # the base hostname & protocol for your site e.g. https://www.someone.com
+baseurl : / # does not include hostname
+title   : Location
 description: > # this means to ignore newlines until "Language & timezone"
-  Zemdalk的个人博客
+  The thing that hath been, it is that which shall be;
+  and that which is done is that which shall be done:
+  and there is no new thing under the sun.
 
 
 ## => Language and Timezone
 ##############################
-lang: zh-CN
-timezone: # see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for the available values
+lang: zh # the language of your site, default as "en"
+timezone: Asia/Shanghai # see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for the available values
 
 
 ## => Author and Social
 ##############################
 author:
-  type      : # "person" (default), "organization"
-  name      : Zemdalk
+  type      : person # "person" (default), "organization"
+  name      : 傻子王
   url       :
   avatar    : # path or url of avatar image (square)
-  bio       : Uninvited.
-  email     : Zemdalk@gmail.com
+  bio       : There is nothing new.
+  email     : aoijf627@gmail.com
   facebook  : # "user_name" the last part of your profile url, e.g. https://www.facebook.com/user_name
-  twitter   : infinit63624370 # "user_name" the last part of your profile url, e.g. https://twitter.com/user_name
+  twitter   : # "user_name" the last part of your profile url, e.g. https://twitter.com/user_name
   weibo     : # "user_id"   the last part of your profile url, e.g. https://www.weibo.com/user_id/profile?...
   googleplus: # "user_id"   the last part of your profile url, e.g. https://plus.google.com/u/0/user_id
-  telegram  : Zemdalk # "user_name" the last part of your profile url, e.g. https://t.me/user_name
+  telegram  : # "user_name" the last part of your profile url, e.g. https://t.me/user_name
   medium    : # "user_name" the last part of your profile url, e.g. https://medium.com/user_name
   zhihu     : # "user_name" the last part of your profile url, e.g. https://www.zhihu.com/people/user_name
   douban    : # "user_name" the last part of your profile url, e.g. https://www.douban.com/people/user_name
   linkedin  : # "user_name" the last part of your profile url, e.g. https://www.linkedin.com/in/user_name
-  github    : Zemdalk # "user_name" the last part of your profile url, e.g. https://github.com/user_name
+  github    : # "user_name" the last part of your profile url, e.g. https://github.com/user_name
   npm       : # "user_name" the last part of your profile url, e.g. https://www.npmjs.com/~user_name
 
 
 ## => GitHub Repository (if the site is hosted by GitHub)
 ##############################
-repository: Zemdalk/zemdalk.github.io
+repository: Richard-dick/Richard-dick.github.io
 repository_tree: main
 
 
@@ -78,20 +80,20 @@ license: CC-BY-NC-4.0 # "CC-BY-4.0", "CC-BY-SA-4.0", "CC-BY-NC-4.0", "CC-BY-ND-4
 
 ## TOC
 toc:
-  selectors: # "h1,h2,h3" (default)
+  selectors: "h1,h2,h3" #(default)
 
 
 ## => Markdown Enhancements
 ##############################
 ## Mathjax
 mathjax: true
-mathjax_autoNumber: # false (default), true
+mathjax_autoNumber: true # false (default), true
 
 ## Mermaid
-mermaid: # false (default), true
+mermaid: true # false (default), true
 
 ## Chart
-chart: # false (default), true
+chart: true # false (default), true
 
 
 ## => Paginate
@@ -108,17 +110,17 @@ sources: # bootcdn (default), unpkg
 ## => Sharing
 ##############################
 sharing:
-  provider: addthis # false (default), "addtoany", "addthis", "custom"
+  provider: false # false (default), "addtoany", "addthis", "custom"
 
   ## AddThis
   addthis:
-    id: ra-6190e518bc83bc06 # AddThis pubid, e.g. ra-5xxxxxxxxxxx
+    id: # AddThis pubid, e.g. ra-5xxxxxxxxxxx
 
 
 ## => Comments
 ##############################
 comments:
-  provider: gitalk # false (default), "disqus", "gitalk", "valine", "custom"
+  provider: false # false (default), "disqus", "gitalk", "valine", "custom"
 
   ## Disqus
   disqus:
@@ -127,11 +129,11 @@ comments:
   ## Gitalk
   # please refer to https://github.com/gitalk/gitalk for more info.
   gitalk:
-    clientID    : '448035ac364d674c862d' # GitHub Application Client ID
-    clientSecret: '565840a1299afdab51245bba1609cd4b2dc02452' # GitHub Application Client Secret
-    repository  : 'comment-container' # GitHub repo
-    owner       : 'Zemdalk' # GitHub repo owner
-    admin: ['Zemdalk'] # GitHub repo owner and collaborators, only these guys can initialize GitHub issues, IT IS A LIST.
+    clientID    : # GitHub Application Client ID
+    clientSecret: # GitHub Application Client Secret
+    repository  : # GitHub repo
+    owner       : # GitHub repo owner
+    admin: # GitHub repo owner and collaborators, only these guys can initialize GitHub issues, IT IS A LIST.
       # - your GitHub Id
 
   ## Valine
@@ -169,11 +171,11 @@ search:
 ## => Analytics
 ##############################
 analytics:
-  provider: google # false (default), "google", "custom"
+  provider: false # false (default), "google", "custom"
 
   ## Google Analytics
   google:
-    tracking_id : G-FZ2CD3K4G3 # Google Analytics id for the site
+    tracking_id : # Google Analytics id for the site
     anonymize_ip: false # Anonymize IP tracking for Analytics
 
 
@@ -211,8 +213,8 @@ defaults:
       license: true
       aside:
         toc: true
-      show_edit_on_github: false
-      show_subscribe: false
+      show_edit_on_github: true
+      show_subscribe: true
       pageview: true
 
 
