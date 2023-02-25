@@ -1,5 +1,5 @@
 ---
-title: 学科-1
+title: 脑机接口-入门
 tags: Comments
 ---
 
