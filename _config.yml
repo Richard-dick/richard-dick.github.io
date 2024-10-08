@@ -175,7 +175,7 @@ analytics:
 
   ## Google Analytics
   google:
-    tracking_id : richard-github # Google Analytics id for the site
+    tracking_id : G-D4W58QLX01 # Google Analytics id for the site
     anonymize_ip: true # Anonymize IP tracking for Analytics
 
 
