@@ -54,8 +54,6 @@ a的发音很直接，无论带什么 accent，都是发 [a] 音。
   - chef, schéma
 - cc在e, i, y前, 读[ks]
   - accepter accent accident
-。。。。。
-
 
 
 ## e
@@ -146,18 +144,11 @@ a的发音很直接，无论带什么 accent，都是发 [a] 音。
 - ô[o]:
   - tôt drôle hôte
 
-## p
-
-直接
 
 ## q
 
 - qu 发 [k]:
   - qui quel disque casque
-
-## r
-
-直接
 
 ## s
 
@@ -240,6 +231,7 @@ x一般读[ks]
 鼻腔元音多加 nm
 
 yn,ym
+
 ******
 
 - oi, oî, oy, 读[wa]	
