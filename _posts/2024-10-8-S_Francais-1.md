@@ -7,7 +7,7 @@ key: Study-Course
 自己的法语读音小节，正规详见[法语助手](https://dict.eudic.net/Content/help/dict/fr_pronunciation_rules.html)。
 
 <!--more-->
-
+法语属于印欧语族的拉丁语系。
 
 法语中共有35个音素，分为：15个元音音素（voyelle），17个辅音音素（consonne）以及3个半元音（又称半辅音）音素（semi-voyelle/semi-consonne）。
 
@@ -179,6 +179,7 @@ s在两个元音字母之间 [z]
 ## x
 x一般读[ks]
 
+- + 元音为[εgz]
 ...
 
 ## y
