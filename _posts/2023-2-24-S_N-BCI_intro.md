@@ -1,6 +1,6 @@
 ---
 title: 脑机接口-入门
-tags: Comments
+tags: Comments Collection
 ---
 
 <!--more-->

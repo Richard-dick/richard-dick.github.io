@@ -1,6 +1,6 @@
 ---
 title: 法语阴阳性
-tags: Study Course Francais
+tags: Learning Course Francais
 key: Study-Course
 ---
 

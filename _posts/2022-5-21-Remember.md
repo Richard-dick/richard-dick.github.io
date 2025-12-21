@@ -1,6 +1,6 @@
 ---
 title: Remember
-tags: A-阅读 诗歌 翻译
+tags: Reading Poetry Translation
 key: Translation
 mathjax: true
 typora-root-url: ..

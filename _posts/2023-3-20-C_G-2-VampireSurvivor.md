@@ -1,6 +1,6 @@
 ---
 title: 游戏评测-2：VampireSurvivor
-tags: Comments Games-2 VampireSurvivor Rogue
+tags: Comments Games VampireSurvivor Rogue
 key: VampireSurvivor
 ---
 

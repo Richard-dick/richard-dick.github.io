@@ -1,6 +1,6 @@
 ---
 title: 非理性
-tags: ration irrationality
+tags: Ration Irrationality Thought
 key: Daily Writing
 ---
 
