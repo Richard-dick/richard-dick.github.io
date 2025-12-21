@@ -1,6 +1,6 @@
 ---
 title: 法语读音
-tags: Study Course Francais
+tags: Learning Course Francais
 key: Study-Course
 ---
 
