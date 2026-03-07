@@ -23,15 +23,15 @@ const specCollection = defineCollection({
 	schema: z.object({}),
 });
 const reviewsCollection = defineCollection({
-    schema: z.object({
-        title: z.string(),
-        category: z.enum(['book', 'movie', 'game']),
-        star: z.number().min(0).max(5),
-        // 模仿 Fuwari 的写法，让 tags/keys 变成可选的空数组，防止没填时报错
-        keys: z.array(z.string()).optional().default([]), 
-        cover: z.string(),
-        date: z.date(),
-    }),
+	schema: z.object({
+		title: z.string(),
+		category: z.enum(["book", "movie", "game"]),
+		star: z.number().min(0).max(5),
+		// 模仿 Fuwari 的写法，让 tags/keys 变成可选的空数组，防止没填时报错
+		keys: z.array(z.string()).optional().default([]),
+		cover: z.string(),
+		date: z.date(),
+	}),
 });
 export const collections = {
 	posts: postsCollection,

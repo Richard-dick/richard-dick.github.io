@@ -1,24 +1,26 @@
 ---
-import { getCollection } from 'astro:content';
-import MainGridLayout from '../layouts/MainGridLayout.astro';
+import { getCollection } from "astro:content";
+import MainGridLayout from "../layouts/MainGridLayout.astro";
 
-const allReviews = await getCollection('reviews');
+const allReviews = await getCollection("reviews");
 const sortedReviews = allReviews.sort((a, b) => {
-    return new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf();
+	return new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf();
 });
 
 function renderStars(star: number) {
-    const fullStars = Math.floor(star);
-    const hasHalfStar = star % 1 !== 0;
-    const emptyStars = 5 - Math.ceil(star);
-    return '⭐'.repeat(fullStars) + (hasHalfStar ? '✨' : '') + '☆'.repeat(emptyStars);
+	const fullStars = Math.floor(star);
+	const hasHalfStar = star % 1 !== 0;
+	const emptyStars = 5 - Math.ceil(star);
+	return (
+		"⭐".repeat(fullStars) + (hasHalfStar ? "✨" : "") + "☆".repeat(emptyStars)
+	);
 }
 
 // 建立一个映射，把英文的 category 换成好看的中文标签
 const categoryMap: Record<string, string> = {
-    'book': '📖 阅读',
-    'movie': '🎬 观影',
-    'game': '🎮 游戏'
+	book: "📖 阅读",
+	movie: "🎬 观影",
+	game: "🎮 游戏",
 };
 ---
 
