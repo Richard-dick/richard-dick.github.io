@@ -25,6 +25,7 @@ jobs:
         uses: withastro/action@v3
         with:
             package-manager: pnpm
+            pnpm-version: 9.14.4
 
   deploy:
     needs: build
