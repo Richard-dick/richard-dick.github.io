@@ -2,7 +2,7 @@
 title: "Hades"
 category: "game"
 star: 5
-keys: ["AI", "Interaction", "Sci-Fi", "Lonely"]
+keys: ["Roguelite", "2.5D", "Story", "PassGame"]
 cover: "https://cdn.jsdelivr.net/gh/Richard-dick/blog-image@main/reviews/20260307201740286.png"
 date: 2021-12-24
 ---

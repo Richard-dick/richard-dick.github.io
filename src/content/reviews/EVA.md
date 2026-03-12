@@ -2,7 +2,7 @@
 title: "Eva"
 category: "movie"
 star: 5
-keys: ["AI", "Interaction", "Sci-Fi", "Lonely"]
+keys: ["EVA", "Philosophy", "Story", "Profound"]
 cover: "https://cdn.jsdelivr.net/gh/Richard-dick/blog-image@main/reviews/videoCover-%E3%80%90EVA%E3%80%91%E6%84%9F%E8%B0%A2%E4%BD%A0%E6%9B%BE%E6%9D%A5%E8%BF%87%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C_%E2%94%82%E2%96%8C_One_Last_Kiss.One_Last_Kiss_(%E6%9C%89%E5%AD%97%E5%B9%95)4K.388702270.jpeg"
 date: 2026-01-09
 ---

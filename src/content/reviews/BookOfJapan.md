@@ -2,7 +2,7 @@
 title: "以日为鉴：衰退时代生存指南"
 category: "book"
 star: 4
-keys: ["AI", "Interaction", "Sci-Fi", "Lonely"]
+keys: ["Finance", "History", "Japan", "TheLost30Years"]
 cover: "https://cdn.jsdelivr.net/gh/Richard-dick/blog-image@main/reviews/20260307200124159.png"
 date: 2025-12-21
 ---

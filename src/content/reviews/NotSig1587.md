@@ -2,7 +2,7 @@
 title: "万历十五年"
 category: "book"
 star: 5
-keys: ["AI", "Interaction", "Sci-Fi", "Lonely"]
+keys: ["History", "Characters", "MingDynasty", "Fallen"]
 cover: "https://cdn.jsdelivr.net/gh/Richard-dick/blog-image@main/reviews/20260307202649443.png"
 date: 2026-01-05
 ---
