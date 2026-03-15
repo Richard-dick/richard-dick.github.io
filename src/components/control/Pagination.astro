@@ -47,7 +47,8 @@ if (r === page.lastPage - 2) pages.push(page.lastPage - 1);
 if (r < page.lastPage) pages.push(page.lastPage);
 
 const getPageUrl = (p: number) => {
-	const normalizedBasePath = basePath === "/" ? "" : basePath.replace(/\/+$/, "");
+	const normalizedBasePath =
+		basePath === "/" ? "" : basePath.replace(/\/+$/, "");
 	if (p === 1) return normalizedBasePath ? `${normalizedBasePath}/` : "/";
 	return normalizedBasePath ? `${normalizedBasePath}/${p}/` : `/${p}/`;
 };

@@ -14,7 +14,9 @@ export async function getStaticPaths({ paginate }) {
 
 const { page } = Astro.props;
 const allReviews = await getCollection("reviews");
-const categories = Array.from(new Set(allReviews.map((review) => review.data.category)));
+const categories = Array.from(
+	new Set(allReviews.map((review) => review.data.category)),
+);
 
 function renderStars(star: number) {
 	const fullStars = Math.floor(star);
