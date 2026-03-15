@@ -1,0 +1,146 @@
+---
+import { getCollection } from "astro:content";
+import Pagination from "../../components/control/Pagination.astro";
+import MainGridLayout from "../../layouts/MainGridLayout.astro";
+
+export async function getStaticPaths({ paginate }) {
+	const allReviews = await getCollection("reviews");
+	const sortedReviews = allReviews.sort((a, b) => {
+		return new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf();
+	});
+
+	return paginate(sortedReviews, { pageSize: 10 });
+}
+
+const { page } = Astro.props;
+const allReviews = await getCollection("reviews");
+const categories = Array.from(new Set(allReviews.map((review) => review.data.category)));
+
+function renderStars(star: number) {
+	const fullStars = Math.floor(star);
+	const hasHalfStar = star % 1 !== 0;
+	const emptyStars = 5 - Math.ceil(star);
+	return (
+		"⭐".repeat(fullStars) + (hasHalfStar ? "✨" : "") + "☆".repeat(emptyStars)
+	);
+}
+
+const categoryMap: Record<string, string> = {
+	book: "📖 阅读",
+	movie: "🎬 观影",
+	game: "🎮 游戏",
+};
+---
+
+<MainGridLayout title="书影音记录" description="我的阅读、观影与游戏短评">
+	<div class="flex w-full justify-between items-center mb-6">
+		<h1 class="text-3xl font-bold text-black dark:text-white transition-colors">
+			灵感与记录
+		</h1>
+		<div class="text-sm text-gray-500">
+			本页 <span id="review-count">{page.data.length}</span> 篇短评
+		</div>
+	</div>
+
+	<div class="flex flex-wrap gap-3 mb-8">
+		<button class="filter-btn px-4 py-2 rounded-lg text-sm font-bold transition-all bg-[var(--primary)] text-white shadow-md" data-filter="all">
+			全部
+		</button>
+		{categories.map((category) => (
+			<button class="filter-btn px-4 py-2 rounded-lg text-sm font-bold transition-all bg-white dark:bg-[var(--card-bg)] text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 border border-black/5 dark:border-white/5" data-filter={category}>
+				{categoryMap[category] ?? category}
+			</button>
+		))}
+	</div>
+
+	<div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="reviews-container">
+		{page.data.map(async (review) => {
+			const { Content } = await review.render();
+
+			return (
+				<div class="review-card flex flex-col overflow-hidden rounded-2xl bg-white dark:bg-[var(--card-bg)] shadow-sm hover:shadow-md transition-shadow duration-300 border border-black/5 dark:border-white/5"
+					data-category={review.data.category}>
+					<div class="relative h-48 w-full overflow-hidden bg-gray-100 dark:bg-gray-800">
+						<img
+							src={review.data.cover}
+							alt={review.data.title}
+							class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+						/>
+						<div class="absolute top-3 left-3 px-2 py-1 bg-black/70 text-white text-xs rounded-md backdrop-blur-sm font-bold tracking-wider">
+							{categoryMap[review.data.category]}
+						</div>
+					</div>
+
+					<div class="p-5 flex flex-col flex-grow">
+						<div class="flex justify-between items-start mb-3 gap-2">
+							<h2 class="text-xl font-bold text-black dark:text-white line-clamp-2 leading-snug">
+								{review.data.title}
+							</h2>
+							<div class="text-sm whitespace-nowrap" title={`评分: ${review.data.star}`}>
+								{renderStars(review.data.star)}
+							</div>
+						</div>
+
+						{review.data.keys.length > 0 && (
+							<div class="flex flex-wrap gap-2 mb-4">
+								{review.data.keys.map((key) => (
+									<span class="px-2 py-1 text-xs rounded-md bg-[var(--primary)]/10 text-[var(--primary)] transition-colors">
+										#{key}
+									</span>
+								))}
+							</div>
+						)}
+
+						<div class="prose prose-sm dark:prose-invert max-w-none flex-grow text-gray-600 dark:text-gray-300">
+							<Content />
+						</div>
+
+						<div class="mt-4 pt-4 border-t border-gray-100 dark:border-gray-800 text-right text-xs text-gray-400">
+							{new Date(review.data.date).toISOString().split("T")[0]}
+						</div>
+					</div>
+				</div>
+			);
+		})}
+	</div>
+
+	<Pagination class="mt-10" page={page} basePath="/reviews" />
+</MainGridLayout>
+
+<script>
+	function setupFiltering() {
+		const buttons = document.querySelectorAll(".filter-btn");
+		const cards = document.querySelectorAll(".review-card");
+		const countDisplay = document.getElementById("review-count");
+
+		buttons.forEach((btn) => {
+			btn.addEventListener("click", () => {
+				const filterValue = btn.getAttribute("data-filter");
+				let visibleCount = 0;
+
+				cards.forEach((card) => {
+					if (filterValue === "all" || card.getAttribute("data-category") === filterValue) {
+						(card as HTMLElement).style.display = "flex";
+						visibleCount++;
+					} else {
+						(card as HTMLElement).style.display = "none";
+					}
+				});
+
+				if (countDisplay) countDisplay.textContent = visibleCount.toString();
+
+				buttons.forEach((button) => {
+					button.className = "filter-btn px-4 py-2 rounded-lg text-sm font-bold transition-all bg-white dark:bg-[var(--card-bg)] text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 border border-black/5 dark:border-white/5";
+				});
+				btn.className = "filter-btn px-4 py-2 rounded-lg text-sm font-bold transition-all bg-[var(--primary)] text-white shadow-md";
+			});
+		});
+	}
+
+	document.addEventListener("astro:page-load", setupFiltering);
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", setupFiltering);
+	} else {
+		setupFiltering();
+	}
+</script>
