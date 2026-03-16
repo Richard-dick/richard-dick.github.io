@@ -1,20 +1,27 @@
 ---
-import { getCollection } from "astro:content";
+import { type CollectionEntry, getCollection } from "astro:content";
+import type { GetStaticPaths, Page } from "astro";
 import Pagination from "../../components/control/Pagination.astro";
 import MainGridLayout from "../../layouts/MainGridLayout.astro";
 
-export async function getStaticPaths({ paginate }) {
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
 	const allReviews = await getCollection("reviews");
 	const sortedReviews = allReviews.sort((a, b) => {
 		return new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf();
 	});
 
 	return paginate(sortedReviews, { pageSize: 10 });
+};
+
+interface Props {
+	page: Page<CollectionEntry<"reviews">>;
 }
 
 const { page } = Astro.props;
 const allReviews = await getCollection("reviews");
-const categories = Array.from(new Set(allReviews.map((review) => review.data.category)));
+const categories = Array.from(
+	new Set(allReviews.map((review) => review.data.category)),
+);
 
 function renderStars(star: number) {
 	const fullStars = Math.floor(star);
@@ -53,14 +60,20 @@ const categoryMap: Record<string, string> = {
 		))}
 	</div>
 
-	<div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="reviews-container">
+	<div class="grid grid-cols-1 gap-5" id="reviews-container">
 		{page.data.map(async (review) => {
 			const { Content } = await review.render();
 
 			return (
-				<div class="review-card flex flex-col overflow-hidden rounded-2xl bg-white dark:bg-[var(--card-bg)] shadow-sm hover:shadow-md transition-shadow duration-300 border border-black/5 dark:border-white/5"
+				<div class="review-card flex flex-col sm:flex-row overflow-hidden rounded-2xl bg-white dark:bg-[var(--card-bg)] shadow-sm hover:shadow-md transition-shadow duration-300 border border-black/5 dark:border-white/5"
 					data-category={review.data.category}>
-					<div class="relative h-48 w-full overflow-hidden bg-gray-100 dark:bg-gray-800">
+					<div
+						class={`relative shrink-0 overflow-hidden bg-gray-100 dark:bg-gray-800 ${
+							review.data.category === "game"
+								? "w-full sm:w-[42%] aspect-[3/2]"
+								: "w-full sm:w-[28%] aspect-[2/3]"
+						}`}
+					>
 						<img
 							src={review.data.cover}
 							alt={review.data.title}
@@ -71,9 +84,9 @@ const categoryMap: Record<string, string> = {
 						</div>
 					</div>
 
-					<div class="p-5 flex flex-col flex-grow">
+					<div class="p-5 flex flex-col flex-1 min-w-0">
 						<div class="flex justify-between items-start mb-3 gap-2">
-							<h2 class="text-xl font-bold text-black dark:text-white line-clamp-2 leading-snug">
+							<h2 class="text-xl font-bold text-black dark:text-white line-clamp-1 leading-snug">
 								{review.data.title}
 							</h2>
 							<div class="text-sm whitespace-nowrap" title={`评分: ${review.data.star}`}>
@@ -81,22 +94,21 @@ const categoryMap: Record<string, string> = {
 							</div>
 						</div>
 
-						{review.data.keys.length > 0 && (
-							<div class="flex flex-wrap gap-2 mb-4">
+						<div class="prose prose-sm dark:prose-invert max-w-none text-gray-600 dark:text-gray-300 mb-4">
+							<Content />
+						</div>
+
+						<div class="mt-auto pt-4 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between gap-3">
+							<div class="flex flex-wrap gap-2 min-h-6">
 								{review.data.keys.map((key) => (
 									<span class="px-2 py-1 text-xs rounded-md bg-[var(--primary)]/10 text-[var(--primary)] transition-colors">
 										#{key}
 									</span>
 								))}
 							</div>
-						)}
-
-						<div class="prose prose-sm dark:prose-invert max-w-none flex-grow text-gray-600 dark:text-gray-300">
-							<Content />
-						</div>
-
-						<div class="mt-4 pt-4 border-t border-gray-100 dark:border-gray-800 text-right text-xs text-gray-400">
-							{new Date(review.data.date).toISOString().split("T")[0]}
+							<div class="text-xs text-gray-400 whitespace-nowrap">
+								{new Date(review.data.date).toISOString().split("T")[0]}
+							</div>
 						</div>
 					</div>
 				</div>
