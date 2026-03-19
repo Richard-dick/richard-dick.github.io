@@ -7,4 +7,6 @@ cover: "https://cdn.jsdelivr.net/gh/Richard-dick/blog-image@main/reviews/2026031
 date: 2023-12-07
 ---
 
-muss es sein? es muss sein!
+muss es sein? 
+
+es muss sein!
