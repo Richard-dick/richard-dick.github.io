@@ -1,0 +1,150 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import type { GetStaticPaths, Page } from "astro";
+import Pagination from "../../../components/control/Pagination.astro";
+import MainGridLayout from "../../../layouts/MainGridLayout.astro";
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+	const category = "game" as const;
+	const allReviews = await getCollection("reviews");
+	const sortedReviews = allReviews
+		.filter((review) => review.data.category === category)
+		.sort(
+			(a, b) =>
+				new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
+		);
+
+	return paginate(sortedReviews, { pageSize: 10 });
+};
+
+interface Props {
+	page: Page<CollectionEntry<"reviews">>;
+}
+
+const { page } = Astro.props;
+
+function normalizePathname(pathname: string) {
+	return pathname.endsWith("/") ? pathname : `${pathname}/`;
+}
+
+const pathname = normalizePathname(Astro.url.pathname);
+
+const navItems = [
+	{ href: "/reviews/", label: "最近", active: pathname === "/reviews/" },
+	{
+		href: "/reviews/book/",
+		label: "阅读",
+		active: pathname.startsWith("/reviews/book/"),
+	},
+	{
+		href: "/reviews/movie/",
+		label: "观影",
+		active: pathname.startsWith("/reviews/movie/"),
+	},
+	{
+		href: "/reviews/game/",
+		label: "游戏",
+		active: pathname.startsWith("/reviews/game/"),
+	},
+];
+
+function renderStars(star: number) {
+	const fullStars = Math.floor(star);
+	const hasHalfStar = star % 1 !== 0;
+	const emptyStars = 5 - Math.ceil(star);
+	return (
+		"⭐".repeat(fullStars) + (hasHalfStar ? "✨" : "") + "☆".repeat(emptyStars)
+	);
+}
+
+const categoryMap: Record<string, string> = {
+	book: "📖 阅读",
+	movie: "🎬 观影",
+	game: "🎮 游戏",
+};
+
+const activeTabClass =
+	"px-4 py-2 rounded-lg text-sm font-bold transition-all bg-[var(--primary)] text-white shadow-md";
+const inactiveTabClass =
+	"px-4 py-2 rounded-lg text-sm font-bold transition-all bg-white dark:bg-[var(--card-bg)] text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 border border-black/5 dark:border-white/5";
+---
+
+<MainGridLayout title="书影音记录" description="我的阅读、观影与游戏短评">
+	<div class="flex w-full justify-between items-center mb-6">
+		<h1 class="text-3xl font-bold text-black dark:text-white transition-colors">
+			灵感与记录
+		</h1>
+		<div class="text-sm text-gray-500">本页 {page.data.length} 篇短评</div>
+	</div>
+
+	<div class="flex flex-wrap gap-3 mb-8">
+		{navItems.map((item) => (
+			<a href={item.href} class={item.active ? activeTabClass : inactiveTabClass}>
+				{item.label}
+			</a>
+		))}
+	</div>
+
+	<div class="grid grid-cols-1 gap-5">
+		{page.data.map(async (review) => {
+			const { Content } = await review.render();
+
+			return (
+				<div
+					class="review-card flex flex-col sm:flex-row overflow-hidden rounded-2xl bg-white dark:bg-[var(--card-bg)] shadow-sm hover:shadow-md transition-shadow duration-300 border border-black/5 dark:border-white/5"
+					data-category={review.data.category}
+				>
+					<div
+						class={`relative shrink-0 overflow-hidden bg-gray-100 dark:bg-gray-800 ${
+							review.data.category === "game"
+								? "w-full sm:w-[42%] aspect-[3/2]"
+								: "w-full sm:w-[28%] aspect-[2/3]"
+						}`}
+					>
+						<img
+							src={review.data.cover}
+							alt={review.data.title}
+							class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+						/>
+						<div class="absolute top-3 left-3 px-2 py-1 bg-black/70 text-white text-xs rounded-md backdrop-blur-sm font-bold tracking-wider">
+							{categoryMap[review.data.category] ?? review.data.category}
+						</div>
+					</div>
+
+					<div class="p-5 flex flex-col flex-1 min-w-0">
+						<div class="flex justify-between items-start mb-3 gap-2">
+							<h2 class="text-xl font-bold text-black dark:text-white line-clamp-1 leading-snug">
+								{review.data.title}
+							</h2>
+							<div
+								class="text-sm whitespace-nowrap"
+								title={`评分: ${review.data.star}`}
+							>
+								{renderStars(review.data.star)}
+							</div>
+						</div>
+
+						<div class="prose prose-sm dark:prose-invert max-w-none text-gray-600 dark:text-gray-300 mb-4">
+							<Content />
+						</div>
+
+						<div class="mt-auto pt-4 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between gap-3">
+							<div class="flex flex-wrap gap-2 min-h-6">
+								{review.data.keys.map((key: string) => (
+									<span class="px-2 py-1 text-xs rounded-md bg-[var(--primary)]/10 text-[var(--primary)] transition-colors">
+										#{key}
+									</span>
+								))}
+							</div>
+							<div class="text-xs text-gray-400 whitespace-nowrap">
+								{new Date(review.data.date).toISOString().split("T")[0]}
+							</div>
+						</div>
+					</div>
+				</div>
+			);
+		})}
+	</div>
+
+	<Pagination class="mt-10" page={page} basePath="/reviews/game" />
+</MainGridLayout>

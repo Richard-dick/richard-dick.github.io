@@ -33,7 +33,10 @@ const reviewsCollection = defineCollection({
 		date: z.date(),
 	}),
 });
-export const collections = {
+export const collections: Record<
+	string,
+	ReturnType<typeof defineCollection>
+> = {
 	posts: postsCollection,
 	spec: specCollection,
 	reviews: reviewsCollection,
