@@ -3,7 +3,7 @@ title: "黑客帝国三部曲"
 category: "movie"
 star: 5
 keys: ["Plot", "Action", "Sci-fi", "Series", "Matrix"]
-cover: "https://cdn.jsdelivr.net/gh/Richard-dick/blog-image@main/reviews/20260324140103905.png"
+cover: "https://cdn.jsdelivr.net/gh/Richard-dick/blog-image@main/reviews/20260324140401538.png"
 date: 2024-02-17
 ---
 

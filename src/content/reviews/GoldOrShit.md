@@ -1,5 +1,5 @@
 ---
-title: "走走停停 / Gold or Shit / G for Gap"
+title: "走走停停 / Gold or Shit"
 category: "movie"
 star: 5
 keys: ["Comedy", "Drama", "Family", "Life"]
